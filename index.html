@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <title>Inventario Magazzino</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<html>
+  <head>
+    <base target="_top">
 
-  <header>
-    <h1>📦 Inventario Magazzino</h1>
-  </header>
+    <!-- MOBILE FIRST -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <main id="contenuto">
-    <p class="loading">Caricamento inventario...</p>
-  </main>
+    <!-- iOS / mobile feeling -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-  <script src="script.js"></script>
-</body>
+    <?!= HtmlService.createHtmlOutputFromFile('style').getContent(); ?>
+  </head>
+
+  <body>
+
+    <header class="header">
+      <h1 class="title">Inventario</h1>
+    </header>
+
+    <main class="container">
+      <div id="loading" class="loading">Caricamento…</div>
+      <div id="lista" class="lista"></div>
+    </main>
+
+    <?!= HtmlService.createHtmlOutputFromFile('script').getContent(); ?>
+  </body>
 </html>
