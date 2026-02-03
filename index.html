@@ -1,9 +1,25 @@
 <!DOCTYPE html>
-<html>
-<body style="margin:0">
-  <iframe 
-    src="https://script.google.com/macros/s/AKfycbyKpoypd5eCyHjvKKInsrW2khjzyUHRAw8PQz9-SNEHCIrkNcxziAnWxgYgv9_EZuva/exec"
-    style="width:100vw;height:100vh;border:0">
-  </iframe>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventario</title>
+</head>
+
+<body>
+  <h2>Caricamento inventario...</h2>
+  <div id="app"></div>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbyKpoypd5eCyHjvKKInsrW2khjzyUHRAw8PQz9-SNEHCIrkNcxziAnWxgYgv9_EZuva/exec";
+
+    fetch(API_URL)
+      .then(r => r.text())   // prendiamo direttamente l'HTML
+      .then(html => {
+        document.open();
+        document.write(html);
+        document.close();
+      });
+  </script>
 </body>
 </html>
