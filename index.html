@@ -2,34 +2,23 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-
-  <!-- MOBILE FULLSCREEN -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
   <title>Inventario</title>
 
   <style>
-    /* RESET TOTALE */
-    * {
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      width: 100%;
       height: 100%;
-      overflow: hidden; /* ← elimina scroll */
       background: #f4f5f7;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
     }
 
     iframe {
-      position: fixed;   /* ← importante */
-      inset: 0;          /* top:0 right:0 bottom:0 left:0 */
-      width: 100vw;
-      height: 100vh;
       border: 0;
-      display: block;
+      width: 100%;
+      height: 100%;
     }
   </style>
 </head>
@@ -37,10 +26,8 @@
 <body>
 
   <iframe
-    src="https://script.google.com/macros/s/AKfycbxKRtrm4sMMmjumKJkMlxfxKUpz2P98d1gKkPlmInVQpsfSXVnft9JqJEfa57H0f9Rr/exec"
-    allow="fullscreen">
+    src="https://script.google.com/macros/s/AKfycbxKRtrm4sMMmjumKJkMlxfxKUpz2P98d1gKkPlmInVQpsfSXVnft9JqJEfa57H0f9Rr/exec">
   </iframe>
 
 </body>
 </html>
-
