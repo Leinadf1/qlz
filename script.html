@@ -1,0 +1,67 @@
+<script>
+let ultimoPeso = null;
+
+function init() {
+  google.script.run
+    .withSuccessHandler(render)
+    .getInventario();
+}
+
+function render(prodotti) {
+  const lista = document.getElementById("lista");
+  const loading = document.getElementById("loading");
+
+  loading.style.display = "none";
+  lista.innerHTML = "";
+  ultimoPeso = null;
+
+  prodotti.forEach(p => {
+
+    if (p.peso !== ultimoPeso) {
+      const sep = document.createElement("div");
+      sep.className = "separatore";
+      sep.textContent = p.peso;
+      lista.appendChild(sep);
+      ultimoPeso = p.peso;
+    }
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const lowClass = p.quantita <= 1 ? "low" : "";
+
+    card.innerHTML = `
+      ${p.immagine 
+        ? `<img class="img" src="${p.immagine}">`
+        : `<div class="img"></div>`
+      }
+
+      <div class="info">
+        <div class="nome">${p.nome}</div>
+        <div class="barcode">${p.barcode}</div>
+      </div>
+
+      <div class="azioni">
+        <button class="meno" onclick="updateFast(this, '${p.barcode}', -1)">−</button>
+        <div class="quantita ${lowClass}">${p.quantita}</div>
+        <button class="piu" onclick="updateFast(this, '${p.barcode}', 1)">+</button>
+      </div>
+    `;
+
+    lista.appendChild(card);
+  });
+}
+
+/* Aggiornamento immediato */
+function updateFast(btn, barcode, delta) {
+  const q = btn.parentElement.querySelector(".quantita");
+  let val = Math.max(0, Number(q.textContent) + delta);
+
+  q.textContent = val;
+  q.classList.toggle("low", val <= 1);
+
+  google.script.run.aggiornaQuantita(barcode, delta);
+}
+
+document.addEventListener("DOMContentLoaded", init);
+</script>
