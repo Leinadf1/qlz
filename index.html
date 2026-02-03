@@ -1,77 +1,33 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Inventario</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
-<style>
-body{font-family:system-ui;background:#f4f5f7;margin:0;padding:12px}
-.header{position:sticky;top:0;background:#f4f5f7}
-.title{font-size:22px;font-weight:700;margin-bottom:10px}
-.card{background:#fff;border-radius:18px;padding:14px;margin:12px 0;display:flex;align-items:center;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
-.img{width:80px;height:80px;border-radius:12px;object-fit:cover}
-.azioni{margin-left:auto;display:flex;gap:8px;align-items:center}
-.quantita{font-size:20px;font-weight:700;width:28px;text-align:center}
-button{width:36px;height:36px;font-size:18px;border:none;border-radius:10px}
-</style>
+  <title>Inventario</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #f4f5f7;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+    }
+
+    iframe {
+      border: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="header">
-  <div class="title">Inventario</div>
-</div>
-
-<div id="lista">Caricamento...</div>
-
-<script>
-/* INCOLLA QUI IL TUO /exec */
-const API = "https://script.google.com/macros/s/AKfycbxKRtrm4sMMmjumKJkMlxfxKUpz2P98d1gKkPlmInVQpsfSXVnft9JqJEfa57H0f9Rr/exec";
-
-const IMG = "https://leinadf1.github.io/qlz/images/";
-const PLACEHOLDER = "https://via.placeholder.com/100";
-
-async function load(){
-  const r = await fetch(API + "?action=inventario", { method:"POST" });
-  const prodotti = await r.json();
-
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "";
-
-  prodotti.forEach(p=>{
-    const card = document.createElement("div");
-    card.className = "card";
-
-    card.innerHTML = `
-      <img class="img" src="${IMG+p.barcode+'.jpg'}" onerror="this.src='${PLACEHOLDER}'">
-      <div>
-        ${p.nome}<br>
-        <small>${p.barcode}</small>
-      </div>
-      <div class="azioni">
-        <button onclick="update(this,'${p.barcode}',-1)">-</button>
-        <div class="quantita">${p.quantita}</div>
-        <button onclick="update(this,'${p.barcode}',1)">+</button>
-      </div>
-    `;
-
-    lista.appendChild(card);
-  });
-}
-
-async function update(btn, barcode, delta){
-  const q = btn.parentElement.querySelector(".quantita");
-  let val = Math.max(0, Number(q.textContent) + delta);
-  q.textContent = val;
-
-  await fetch(API + `?action=update&barcode=${barcode}&delta=${delta}`, {
-    method:"POST"
-  });
-}
-
-load();
-</script>
+  <iframe
+    src="https://script.google.com/macros/s/AKfycbxKRtrm4sMMmjumKJkMlxfxKUpz2P98d1gKkPlmInVQpsfSXVnft9JqJEfa57H0f9Rr/exec">
+  </iframe>
 
 </body>
 </html>
